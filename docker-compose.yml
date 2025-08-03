@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ui-bootstrap-app
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: ui_bootstrap
+      DB_USERNAME: root
+      DB_PASSWORD: ""
+    command: php artisan serve --host=0.0.0.0 --port=8000
+    networks:
+      - app-net
+
+  db:
+    image: mysql:8
+    container_name: db-bootstrap
+    restart: unless-stopped
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_DATABASE: ui_bootstrap
+    volumes:
+      - db-bootstrap:/var/lib/mysql
+    networks:
+      - app-net
+
+  vite:
+    image: node:20
+    working_dir: /var/www/html
+    container_name: vite-dev
+    volumes:
+      - ./:/var/www/html
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - "5173:5173"
+    networks:
+      - app-net
+
+volumes:
+  db-bootstrap:
+    external: true
+
+networks:
+  app-net:
+    driver: bridge
