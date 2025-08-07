@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -73,7 +74,7 @@ class UserController extends Controller
         }catch(Exception $e){
             return response()->json([
                 'status'=>'error',
-                'message'=>'Wystąpił błąd!'
+                'message'=>$e->getMessage(), // <-- to jest to co trafia do JS
             ])->setStatusCode(500);
         }
     }

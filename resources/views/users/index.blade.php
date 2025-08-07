@@ -30,3 +30,9 @@
     {{ $users->links() }}
 </div>
 @endsection
+@section('javascript')
+<script>
+    const deleteURL="{{url('users')}}/";
+    </script>
+    @vite('resources/js/delete.js')
+@endsection
