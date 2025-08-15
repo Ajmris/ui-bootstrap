@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
 use Exception;
 use Illuminate\Contracts\View\View;
@@ -33,16 +34,9 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StoreProductRequest $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string|max:1500',
-            'price' => 'required|numeric|min:0',
-            'amount' => 'required|integer|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-        ]);
-        $product = new Product($request->except('image')); // <-- bez pliku w mass assignment
+        $product = new Product($request->validated()); // <-- bez pliku w mass assignment
         if ($request->hasFile('image')) {
             $product->image_path = $request->file('image')->store('products', 'public');
         }
@@ -70,14 +64,14 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(StoreProductRequest $request, Product $product)
     {
-        $product->fill($request->all());
-        if ($request->hasFile('image')) {
-            $product->image_path = $request->file('image')->store('products', 'public');
-        }
-        $product->save();
-        return redirect(route('product.index'));
+    $product->fill($request->validated());
+    if ($request->hasFile('image')) {
+        $product->image_path = $request->file('image')->store('products', 'public');
+    }
+    $product->save();
+    return redirect()->route('product.index')->with('success', 'Produkt został zaktualizowany.');
     }
 
     /**
