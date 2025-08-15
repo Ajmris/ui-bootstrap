@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   app:
     build:
@@ -32,24 +30,24 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: yes
       MYSQL_DATABASE: ui_bootstrap
     volumes:
-      - db-bootstrap:/var/lib/mysql
+      - ui-bootstrap-v2:/var/lib/mysql
     networks:
       - app-net
 
   vite:
     image: node:20
-    working_dir: /var/www/html
     container_name: vite-dev
+    working_dir: /var/www/html
     volumes:
       - ./:/var/www/html
-    command: sh -c "npm install && npm run dev"
     ports:
       - "5173:5173"
+    command: sh -c "npm install && npm run dev"
     networks:
       - app-net
 
 volumes:
-  db-bootstrap:
+  ui-bootstrap-v2:
     external: true
 
 networks:

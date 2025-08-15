@@ -15,6 +15,7 @@ class Product extends Model
      * @var list<string>
      */
     protected $fillable = [
+        'image_path',
         'name',
         'description',
         'amount',

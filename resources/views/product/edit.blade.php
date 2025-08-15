@@ -8,7 +8,7 @@
                 <div class="card-header">Edycja</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('product.update', $product->id) }}">
+                    <form method="POST" action="{{ route('product.update', $product->id) }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -65,7 +65,30 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>                        
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="image" class="col-md-4 col-form-label text-md-end">Grafika</label>
+
+                            <div class="col-md-6">
+                                <input id="image" type="file" class="form-control" name="image">
+                            </div>
+                        </div>
+
+                        <!--<div class="form-group row justify-content-center">
+                            <div class="col-md-6">
+                                <img src="{{ asset('storage/'. $product->image_path) }}" alt="Zdjęcie produktu">
+                            </div>
+                        </div>-->
+                        <div class="form-group row justify-content-center">
+                            <div class="col-md-6">
+                                @if($product->image_path)
+                                    <img src="{{ asset('storage/' . $product->image_path) }}" alt="Zdjęcie produktu" style="max-width: 100%; height: auto;">
+                                @else
+                                    <img src="{{ asset('storage/products/no-image.jpg') }}" alt="Brak zdjęcia" style="max-width: 100%; height: auto;">
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">

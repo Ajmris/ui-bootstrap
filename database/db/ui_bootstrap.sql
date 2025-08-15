@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lip 31, 2025 at 07:54 PM
+-- Generation Time: Aug 09, 2025 at 11:23 AM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.2.4
 
@@ -130,7 +130,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '0001_01_01_000000_create_users_table', 1),
 (2, '0001_01_01_000001_create_cache_table', 1),
 (3, '0001_01_01_000002_create_jobs_table', 1),
-(4, '2025_06_21_120925_add_surname_and_phone_to_users_table', 2);
+(4, '2025_06_21_120925_add_surname_and_phone_to_users_table', 2),
+(5, '2025_08_06_142423_create_products_table', 3),
+(6, '2025_08_08_154220_add_image_path_to_products_table', 4);
 
 -- --------------------------------------------------------
 
@@ -143,6 +145,31 @@ CREATE TABLE `password_reset_tokens` (
   `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `products`
+--
+
+CREATE TABLE `products` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `image_path` varchar(150) DEFAULT NULL,
+  `name` varchar(500) NOT NULL,
+  `description` varchar(1500) NOT NULL,
+  `amount` varchar(255) NOT NULL,
+  `price` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `image_path`, `name`, `description`, `amount`, `price`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'Papierosy', 'Paczka mentolowych Winstonerów, laki-sraki, lub marbolo.', '1', '18.7', '2025-08-06 15:13:03', '2025-08-08 13:27:33'),
+(7, 'products/uVlYJrWdpJRoQUjpOUJx1lJDc0pqGSykeWjT5VyL.png', 'Sukienki', 'FTyu', '16', '120.3', '2025-08-08 14:55:55', '2025-08-08 14:55:55');
 
 -- --------------------------------------------------------
 
@@ -164,9 +191,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('5Vmo6Db9EHpjkXAaViGoXZPVMLzOybezYC0zJB5L', 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:141.0) Gecko/20100101 Firefox/141.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiVGRXMnZla1Y5a2hsY3YzNEFqNWd3ZHA1cWV2aXNPVkpWQ1BITzAxNCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjM7czo0OiJhdXRoIjthOjE6e3M6MjE6InBhc3N3b3JkX2NvbmZpcm1lZF9hdCI7aToxNzUzNjQ1OTEwO319', 1753645921),
-('NISOVHlWYKwDCCT49QTbXHcqRehFrI8MbuJMbpJx', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:141.0) Gecko/20100101 Firefox/141.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWVRmTnZRTEVUdzhLMTdLQlRhU2hDbFR3aWxmMjZRR2dsZlVKeUVPMSI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozMToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2Rhc2hib2FyZCI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjMxOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvZGFzaGJvYXJkIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1753634302),
-('q2pM0nUlsLdu4kjNdvZ0T0gDTOEQpSOBhF1MiVDR', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:141.0) Gecko/20100101 Firefox/141.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSnFucXlGTmw2MWQwcWw4dnpsYmxIc2VtT2RGbk9wdGtZUGRxbEEySSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1753634302);
+('H1tlvxaxr79rutQ7b98njQHA7hOneLj9FmQEUFut', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:141.0) Gecko/20100101 Firefox/141.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibG1iMzdSVkhrdFZPRklKbGxmeFJhbENma3JVU2ZqdER5bWw0R2hQUSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fX0=', 1754683200);
 
 -- --------------------------------------------------------
 
@@ -192,9 +217,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `surname`, `phone_number`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Szymon', 'Tarasiewicz', '570196013', 'szymektarasiewicz@onet.pl', NULL, '$2y$12$EJVsr.C1LmgQFcRtsHthRecnqZI4tetE/YV.ujvEflWKyl9VZ/S0W', NULL, '2025-05-03 16:34:28', '2025-05-03 16:34:28'),
-(2, 'Luigi', 'Russo', '656 398 749', 'luigir20@gmail.it', NULL, '$2y$12$aNwCG5BW0A497PHOhdktjulJjEvRwGXyvUpo.NijWD.vNmjTGcOju', NULL, '2025-06-21 10:14:36', '2025-06-21 10:14:36'),
-(3, 'Mario', 'Lasagna', '356347780', 'lasagna@gmail.it', NULL, '$2y$12$8b3YMDByRixOP4lEieeJreKjeGXEgHd4oqmN2TyaC4.nITGQTittm', NULL, '2025-07-27 13:47:31', '2025-07-27 13:47:31');
+(1, 'Mario', 'Lasagna', '356347780', 'lasagna20@wp.pl', NULL, '$2y$12$Ju/s4Jd9xB4k/j5EgfguL.ZHyRgyS7tLSJGw/SCWNEXXOG9EcYnbe', NULL, '2025-08-07 16:27:05', '2025-08-07 16:27:05'),
+(3, 'Giulia', 'Bianchi', '348 987 654', 'g.bianchi@example.it', '2025-08-05 17:00:05', '$2y$10$exampleHashedPassword9876543210987654321098', 'def456uvw', '2025-08-05 17:00:05', '2025-08-05 17:00:05'),
+(4, 'Peach', 'Ricci', '371 056 800', 'princessa.Pach@gmail.it', NULL, '$2y$12$OvGBbw7wlc.21VueuF8OJtv3L8B/LA5J5bGAWMWsykuIHdKOhkO', NULL, '2025-08-07 17:42:14', '2025-08-07 17:42:14'),
+(108, 'Luigi', 'Russo', '782223611', 'luigir20@gmail.it', NULL, '$2y$12$7/OqhLz9rJeqxzCNuf8NYuTQiIw6p3xRSQy/kIiGzLBEx0XiUa.UK', NULL, '2025-08-07 20:03:39', '2025-08-07 20:03:39');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -245,6 +271,12 @@ ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`email`);
 
 --
+-- Indeksy dla tabeli `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeksy dla tabeli `sessions`
 --
 ALTER TABLE `sessions`
@@ -279,13 +311,19 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

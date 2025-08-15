@@ -40,11 +40,15 @@ class ProductController extends Controller
             'description' => 'nullable|string|max:1500',
             'price' => 'required|numeric|min:0',
             'amount' => 'required|integer|min:0',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
-
-        Product::create($validated);
-
-        return redirect()->route('product.index')->with('success', 'Produkt został dodany.');
+        $product = new Product($request->except('image')); // <-- bez pliku w mass assignment
+        if ($request->hasFile('image')) {
+            $product->image_path = $request->file('image')->store('products', 'public');
+        }
+        $product->save();
+        return redirect()->route('product.index')
+        ->with('success', 'Produkt został dodany.');
     }
 
     /**
@@ -69,6 +73,9 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $product->fill($request->all());
+        if ($request->hasFile('image')) {
+            $product->image_path = $request->file('image')->store('products', 'public');
+        }
         $product->save();
         return redirect(route('product.index'));
     }
