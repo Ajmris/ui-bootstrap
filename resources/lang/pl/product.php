@@ -12,4 +12,5 @@ return [
     'Edit' => 'Edytuj',
     'Delete' => 'Usuń',
     'Product preview' => 'Podgląd produktu',
+    'Category' => 'Kategoria',
 ];

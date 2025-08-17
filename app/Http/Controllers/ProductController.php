@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -28,7 +29,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view("product.create");
+        return view("product.create", [
+            'categories'=>ProductCategory::all()
+        ]);
     }
 
     /**
@@ -58,7 +61,11 @@ class ProductController extends Controller
      */
     public function edit(Product $product): View
     {
-        return view("product.edit",['product'=>$product]);
+        $categories = ProductCategory::all(); // albo ProductCategory::all()
+        return view("product.edit",[
+            'product'=>$product,
+            'categories'=>$categories
+        ]);
     }
 
     /**

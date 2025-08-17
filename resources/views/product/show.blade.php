@@ -8,37 +8,52 @@
                 <div class="card-header">{{ __('product.Product preview') }}</div>
 
                 <div class="card-body">
-                    <div class="form-group row">
+                    <!-- Name -->
+                    <div class="form-group row mb-3">
                         <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('product.Name') }}</label>
-
                         <div class="col-md-6">
                             <input id="name" type="text" maxlength="500" class="form-control" name="name" value="{{ $product->name }}" disabled>
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    <!-- Description -->
+                    <div class="form-group row mb-3">
                         <label for="description" class="col-md-4 col-form-label text-md-end">{{ __('product.Description') }}</label>
-
                         <div class="col-md-6">
                             <textarea id="description" maxlength="1500" class="form-control" name="description" disabled>{{ $product->description }}</textarea>
                         </div>
                     </div>
 
-                    <div class="row mb-3">
+                    <!-- Amount -->
+                    <div class="form-group row mb-3">
                         <label for="amount" class="col-md-4 col-form-label text-md-end">{{ __('product.Amount') }}</label>
-
                         <div class="col-md-6">
                             <input id="amount" type="number" min="0" class="form-control" name="amount" value="{{ $product->amount }}" disabled>
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    <!-- Price -->
+                    <div class="form-group row mb-3">
                         <label for="price" class="col-md-4 col-form-label text-md-end">{{ __('product.Price') }}</label>
-
                         <div class="col-md-6">
                             <input id="price" type="number" step="0.01" min="0" class="form-control" name="price" value="{{ $product->price }}" disabled>
                         </div>
                     </div>
+
+                    <!-- Category -->
+                    <div class="form-group row mb-3">
+                        <label for="category" class="col-md-4 col-form-label text-md-end">{{ __('product.Category') }}</label>
+                        <div class="col-md-6">
+                            <select id="category_id" class="form-control" name="category_id" disabled>
+                                @if(!is_null($product->category))
+                                    <option>{{ $product->category->name }}</option>
+                                @else
+                                    <option>{{ __('None') }}</option>
+                                @endif
+                            </select>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

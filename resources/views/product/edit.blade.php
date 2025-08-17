@@ -41,10 +41,8 @@
 
                         <div class="row mb-3">
                             <label for="amount" class="col-md-4 col-form-label text-md-end">{{ __('Amount') }}</label>
-
                             <div class="col-md-6">
                                 <input id="amount" type="number" min="0" class="form-control @error('amount') is-invalid @enderror" name="amount" value="{{ $product->amount }}" required autocomplete="amount">
-
                                 @error('amount')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -55,11 +53,34 @@
 
                         <div class="form-group row">
                             <label for="price" class="col-md-4 col-form-label text-md-end">{{ __('Price') }}</label>
-
                             <div class="col-md-6">
                                 <input id="price" type="number" step="0.01" min="0" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ $product->price }}" required autocomplete="price">
-
                                 @error('price')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="category_id" class="col-md-4 col-form-label text-md-end">{{ __('product.Category') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="category_id"
+                                        class="form-control @error('category_id') is-invalid @enderror"
+                                        name="category_id"
+                                        required>
+                                    <option value="">{{ __('Brak') }}</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}"
+                                            {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
+                                            {{ $category->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @error('category_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

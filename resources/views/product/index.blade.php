@@ -18,6 +18,7 @@
                     <th scope="col">{{ __('product.Description') }}</th>
                     <th scope="col">{{ __('product.Amount') }}</th>
                     <th scope="col">{{ __('product.Price') }}</th>
+                    <th scope="col">{{ __('product.Category') }}</th>
                     <th scope="col">{{ __('product.Actions') }}</th>
                 </tr>
             </thead>
@@ -29,6 +30,13 @@
                     <td>{{$product->description}}</td>
                     <td>{{$product->amount}}</td>
                     <td>{{$product->price}}</td>
+                    <td>
+                        @if(!is_null($product->category))
+                            {{ $product->category->name }}
+                        @else
+                            <em>Brak kategorii</em>
+                        @endif
+                    </td>
                     <td>
                         <a href="{{ route('product.show', $product->id) }}">
                             <button class="btn btn-primary btn-sm">{{ __('product.Show') }}</button>
