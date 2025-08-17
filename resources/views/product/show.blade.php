@@ -45,7 +45,7 @@
                         <label for="category" class="col-md-4 col-form-label text-md-end">{{ __('product.Category') }}</label>
                         <div class="col-md-6">
                             <select id="category_id" class="form-control" name="category_id" disabled>
-                                @if(!is_null($product->category))
+                                @if($product->hasCategory())
                                     <option>{{ $product->category->name }}</option>
                                 @else
                                     <option>{{ __('None') }}</option>

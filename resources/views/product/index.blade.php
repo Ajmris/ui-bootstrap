@@ -31,7 +31,7 @@
                     <td>{{$product->amount}}</td>
                     <td>{{$product->price}}</td>
                     <td>
-                        @if(!is_null($product->category))
+                        @if($product->hasCategory())
                             {{ $product->category->name }}
                         @else
                             <em>Brak kategorii</em>

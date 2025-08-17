@@ -61,10 +61,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product): View
     {
-        $categories = ProductCategory::all(); // albo ProductCategory::all()
         return view("product.edit",[
             'product'=>$product,
-            'categories'=>$categories
+            'categories'=>ProductCategory::all()
         ]);
     }
 

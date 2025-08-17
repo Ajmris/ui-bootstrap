@@ -64,17 +64,14 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="category_id" class="col-md-4 col-form-label text-md-end">{{ __('product.Category') }}</label>
+                            <label for="category" class="col-md-4 col-form-label text-md-end">{{ __('product.Category') }}</label>
 
                             <div class="col-md-6">
-                                <select id="category_id"
-                                        class="form-control @error('category_id') is-invalid @enderror"
-                                        name="category_id"
-                                        required>
+                                <select id="category"
+                                        class="form-control @error('category_id') is-invalid @enderror" name="category_id">
                                     <option value="">{{ __('Brak') }}</option>
                                     @foreach($categories as $category)
-                                        <option value="{{ $category->id }}"
-                                            {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
+                                        <option value="{{ $category->id }}" @if($product->isSelectedCategory($category->id)) selected @endif>
                                             {{ $category->name }}
                                         </option>
                                     @endforeach

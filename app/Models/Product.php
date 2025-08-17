@@ -26,4 +26,14 @@ class Product extends Model
     public function category(){
         return $this->belongsTo(ProductCategory::class);
     }
+
+    public function isSelectedCategory(int $category_id):bool
+    {
+        return $this->hasCategory() && $this->category->id == $category_id;
+    }
+
+    public function hasCategory():bool
+    {
+        return !is_null($this->category);
+    }
 }
