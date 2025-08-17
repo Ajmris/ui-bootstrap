@@ -101,17 +101,15 @@
                 <h5>Produkty</h5>
                 <span>Ilość: {{ count($products) }}</span>
 
-                <h5>Kategorie</h5>
-                <ul class="list-unstyled">
-                    <li>Monitory</li>
-                    <li>Myszki</li>
-                    <li>Pady</li>
-                    <li>Klawiatury</li>
-                    <li>Podzespoły do komputera</li>
-                    <li>Akcesoria</li>
-                    <li>Fotele</li>
-                </ul>
-
+                <h5 class="text-uppercase font-weight-bold mb-3">Kategorie</h5>
+                @foreach($categories as $category)
+                    <div class="mt-2 mb-2 pl-2">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="category-{{$category->id}}">
+                            <label class="custom-control-label" for="category-{{$category->id}}">{{ $category->name }}</label>
+                        </div>
+                    </div>
+                @endforeach
                 <h5>Cena</h5>
                 <form>
                     <div class="mb-2">
