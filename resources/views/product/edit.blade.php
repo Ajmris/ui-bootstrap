@@ -5,14 +5,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Edycja</div>
+                <div class="card-header">{{ __('Edit') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('product.update', $product->id) }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">Nazwa</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" maxlength="500" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $product->name }}" required autocomplete="name" autofocus>
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="description" class="col-md-4 col-form-label text-md-end">Opis</label>
+                            <label for="description" class="col-md-4 col-form-label text-md-end">{{ __('Description') }}</label>
 
                             <div class="col-md-6">
                                 <textarea id="description" maxlength="1500" class="form-control @error('description') is-invalid @enderror" name="description" required autofocus>{{ $product->description }}</textarea>
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="amount" class="col-md-4 col-form-label text-md-end">Ilość</label>
+                            <label for="amount" class="col-md-4 col-form-label text-md-end">{{ __('Amount') }}</label>
 
                             <div class="col-md-6">
                                 <input id="amount" type="number" min="0" class="form-control @error('amount') is-invalid @enderror" name="amount" value="{{ $product->amount }}" required autocomplete="amount">
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="price" class="col-md-4 col-form-label text-md-end">Cena</label>
+                            <label for="price" class="col-md-4 col-form-label text-md-end">{{ __('Price') }}</label>
 
                             <div class="col-md-6">
                                 <input id="price" type="number" step="0.01" min="0" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ $product->price }}" required autocomplete="price">
@@ -68,7 +68,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="image" class="col-md-4 col-form-label text-md-end">Grafika</label>
+                            <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('Image') }}</label>
 
                             <div class="col-md-6">
                                 <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image">
@@ -82,7 +82,7 @@
                         <div class="form-group row justify-content-center">
                             <div class="col-md-6">
                                 @if(!is_null($product->image_path))
-                                    <img src="{{ asset('storage/'. $product->image_path) }}" alt="Zdjęcie produktu" style="max-width: 100%; height: auto;">
+                                    <img src="{{ asset('storage/'. $product->image_path) }}" alt="{{ __('Product image') }}" style="max-width: 100%; height: auto;">
                                 @endif
                             </div>
                         </div>
@@ -90,7 +90,7 @@
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Zapisz
+                                    {{ __('Save') }}
                                 </button>
                             </div>
                         </div>
