@@ -42,6 +42,7 @@ return [
     'export'          => 'Eksportuj',
     'file'            => 'Plik',
     'files'           => 'Pliki',
+    'filter'          => 'Filtruj',
     'go_home'         => 'Idź do strony głównej',
     'hide'            => 'Ukryj',
     'home'            => 'Strona główna',
@@ -114,6 +115,8 @@ return [
     'up'              => 'W górę',
     'update'          => 'Aktualizuj',
     'user'            => 'Użytkownik',
+    'user title'      => 'Lista użytkowników',
+    'user deleted'    => 'Użytkownik usunięty!',
     'view'            => 'Widok',
     'yes'             => 'Tak',
 ];

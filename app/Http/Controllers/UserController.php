@@ -6,6 +6,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -68,6 +69,7 @@ class UserController extends Controller
         //$user=User::find($id);
         try{
             $user->delete();
+            Session::flash('status', __('actions.user deleted'));
             return response()->json([
                 'status'=>'success'
             ]);

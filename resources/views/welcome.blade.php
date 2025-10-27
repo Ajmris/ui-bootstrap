@@ -16,7 +16,7 @@
     }
 
     /* Panel boczny */
-    .sidebar {
+    .sidebar-filter {
         width: 200px; /* lub mniej, np. 180px */
         min-width: 180px;
         padding: 1rem;
@@ -25,7 +25,7 @@
         font-weight: 600;
         font-size: 0.9rem;
     }
-    .sidebar h5 {
+    .sidebar-filter h5 {
         border-bottom: 1px solid #FFD700;
         padding-bottom: 5px;
         margin-bottom: 10px;
@@ -92,42 +92,39 @@
         margin-bottom: 2rem;
     }
 </style>
-
 <div class="bg-overlay">
     <div class="container-fluid position-relative" style="z-index: 1;">
         <div class="row">
             <!-- Panel boczny -->
-            <div class="col-md-2 sidebar">
+            <form class="col-md-2 sidebar-filter">
                 <h5>Produkty</h5>
                 <span>Ilość: {{ count($products) }}</span>
-
                 <h5 class="text-uppercase font-weight-bold mb-3">Kategorie</h5>
                 @foreach($categories as $category)
                     <div class="mt-2 mb-2 pl-2">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="category-{{$category->id}}">
+                            <input type="checkbox" class="custom-control-input" name="filter[categories][]" id="category-{{$category->id}}" value="{{$category->id}}">
                             <label class="custom-control-label" for="category-{{$category->id}}">{{ $category->name }}</label>
                         </div>
                     </div>
                 @endforeach
                 <h5>Cena</h5>
-                <form>
+                <section>
                     <div class="mb-2">
-                        <input type="number" class="form-control form-control-sm" placeholder="Od">
+                        <input type="number" class="form-control w-50 pull-left mb-2" placeholder="10" name="filter[price_min]" id="price-min-control">
                     </div>
                     <div>
-                        <input type="number" class="form-control form-control-sm" placeholder="Do">
+                        <input type="number" class="form-control w-50 pull-right" placeholder="10 000,01" name="filter[price_max]" id="price-max-control">
                     </div>
-                </form>
-            </div>
-
+                </section>
+                <button type="button" id="filter-button" class="btn btn-lg btn-block btn-primary mt-5">{{ __('actions.filter') }}</button>
+            </form>
             <!-- Główna część -->
             <div class="col-md-9 main-content">
                 <div class="welcome-text">
                     <h1>Witaj Gościu!</h1>
                     <p class="welcome-subtext">Sklep ui-bootstrap – najlepsze ceny, najlepszy sprzęt, najlepszy deal $$</p>
                 </div>
-
                 <!-- Sortowanie -->
                 <div class="sort-box d-flex justify-content-between align-items-center">
                     <div>
@@ -138,39 +135,59 @@
                             <option>Najdroższe</option>
                         </select>
                     </div>
-                    <div>
-                        Widok:
-                        <select class="form-select form-select-sm d-inline-block w-auto">
-                            <option>4</option>
-                            <option>8</option>
-                            <option>12</option>
-                        </select>
+                    <div class="dropdown float-md-right">
+                        <a class="btn btn-light btn-lg dropdown-toggle products-actual-count"
+                            href="#" 
+                            role="button" 
+                            data-bs-toggle="dropdown" 
+                            aria-expanded="false">
+                            {{ $paginate }}
+                        </a>
+                        <ul class="dropdown-menu products-count">
+                            @foreach ($options as $option)
+                                <li>
+                                    <a class="dropdown-item @if ($option == $paginate) active @endif"
+                                    href="{{ request()->fullUrlWithQuery(['paginate' => $option, 'page' => 1]) }}">
+                                        {{ $option }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
-
                 <!-- Lista produktów -->
-                <div class="row g-4">
-    @foreach($products ?? [] as $product)
-        <div class="col-md-3">
-            <div class="product-card">
-                @if($product->image_path)
-                    <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}">
-                @else
-                    <img src="{{ asset('storage/products/no-image.jpg') }}" alt="Brak zdjęcia">
-                @endif
-                <div class="product-info">
-                    <h6>{{ $product->name }}</h6>
-                    <p>{{ number_format($product->price, 2) }} zł</p>
+                <div class="row g-4" id="products-wrapper">
+                @foreach($products as $product)
+                    <div class="col-md-3">
+                        <div class="product-card">
+                            @if(!is_null($product->image_path))
+                                <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}">
+                            @else
+                                <img src="{{$defaultImage}}" alt="Brak zdjęcia">
+                            @endif
+                            <div class="product-info">
+                                <h6>{{ $product->name }}</h6>
+                                <p>{{ number_format($product->price, 2) }} zł</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
                 </div>
-            </div>
-        </div>
-    @endforeach
-</div>
-
 <!-- Dodaj linki do paginacji -->
-{{ $products->links() }}
+                <div class="pagination-wrapper">
+                    {{ $products->links('pagination::bootstrap-5') }}
+                </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+@section('javascript')
+    <script>
+        const storagePath='{{ asset("storage") }}/';
+        const defaultImage='{{ $defaultImage }}';
+    </script>
+@endsection
+@section('js-files')
+    @vite('resources/js/welcome.js')
 @endsection

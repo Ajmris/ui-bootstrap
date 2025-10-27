@@ -6,6 +6,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Exception;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -27,7 +28,7 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         return view("product.create", [
             'categories'=>ProductCategory::all()
@@ -44,8 +45,7 @@ class ProductController extends Controller
             $product->image_path = $request->file('image')->store('products', 'public');
         }
         $product->save();
-        return redirect()->route('product.index')
-        ->with('success', 'Produkt został dodany.');
+        return redirect()->route('product.index')->with('status', __('product.status.store.success'));;
     }
 
     /**
@@ -72,12 +72,12 @@ class ProductController extends Controller
      */
     public function update(StoreProductRequest $request, Product $product)
     {
-    $product->fill($request->validated());
-    if ($request->hasFile('image')) {
-        $product->image_path = $request->file('image')->store('products', 'public');
-    }
-    $product->save();
-    return redirect()->route('product.index')->with('success', 'Produkt został zaktualizowany.');
+        $product->fill($request->validated());
+        if ($request->hasFile('image')) {
+            $product->image_path = $request->file('image')->store('products', 'public');
+        }
+        $product->save();
+    return redirect(route('product.index'))->with('status', __('product.status.update.success'));
     }
 
     /**
@@ -87,6 +87,7 @@ class ProductController extends Controller
     {
         try{
             $product->delete();
+            Session::flash('status', __('product.status.delete.success'));
             return response()->json([
                 'status'=>'success'
             ]);

@@ -1,16 +1,30 @@
 <?php
 
 return [
-    'Product list' => 'Lista produktów',
-    'Add' => 'Dodaj',
-    'Name' => 'Nazwa',
-    'Description' => 'Opis',
-    'Amount' => 'Ilość',
-    'Price' => 'Cena',
     'Actions' => 'Akcje',
-    'Show' => 'Pokaż',
-    'Edit' => 'Edytuj',
-    'Delete' => 'Usuń',
-    'Product preview' => 'Podgląd produktu',
+    'Add' => 'Dodaj',
+    'Add product' => 'Dodaj produkt!',
+    'Amount' => 'Ilość',
     'Category' => 'Kategoria',
+    'Delete' => 'Usuń',
+    'Description' => 'Opis',
+    'Edit' => 'Edytuj',
+    'Image' => 'Grafika',
+    'Name' => 'Nazwa',
+    'Price' => 'Cena',
+    'Product image' => 'Grafika produktu',
+    'Product list' => 'Lista produktów',
+    'Product preview' => 'Podgląd produktu',
+    'Show' => 'Pokaż',
+    'status' => [
+        'delete' => [
+            'success' => 'Produkt usunięty!'
+        ],
+        'store' => [
+            'success' => 'Produkt zapisany!'
+        ],
+        'update' => [
+            'success' => 'Produkt zaktualizowany!'
+        ]
+    ]
 ];
