@@ -4,10 +4,10 @@
     @include('helpers.flash-messages')
     <div class="row align-items-center mb-3">
         <div class="col">
-            <h1 class="h3 mb-0">{{ __('product.Product list') }}</h1>
+            <h1 class="h3 mb-0"><i class="fa-solid fa-clipboard-list"></i>{{ __('product.Product list') }}</h1>
         </div>
         <div class="col-auto">
-            <a href="{{ route('product.create') }}" class="btn btn-primary">{{ __('product.Add') }}</a>
+            <a href="{{ route('product.create') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i>{{ __('product.Add') }}</a>
         </div>
     </div>
     <div class="row">
@@ -40,12 +40,12 @@
                     </td>
                     <td>
                         <a href="{{ route('product.show', $product->id) }}">
-                            <button class="btn btn-primary btn-sm">{{ __('product.Show') }}</button>
+                            <button class="btn btn-primary btn-sm">{{ __('product.Show') }}<i class="fa-solid fa-magnifying-glass"></i></button>
                         </a>
                         <a href="{{ route('product.edit', $product->id) }}">
-                            <button class="btn btn-success btn-sm">{{ __('product.Edit') }}</button>
+                            <button class="btn btn-success btn-sm">{{ __('product.Edit') }}<i class="fa-solid fa-pen-to-square"></i></button>
                         </a>
-                        <button class="btn btn-danger btn-sm delete" data-id="{{ $product->id }}">{{ __('product.Delete') }}</button>
+                        <button class="btn btn-danger btn-sm delete" data-id="{{ $product->id }}">{{ __('product.Delete') }}<i class="fa-solid fa-trash"></i></button>
                     </td>
                 </tr>
                 @endforeach

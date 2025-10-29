@@ -4,7 +4,7 @@
     @include('helpers.flash-messages')
     <div class="row align-items-center mb-3">
         <div class="col">
-            <h1 class="h3 mb-0">{{ __('actions.user title') }}</h1>
+            <h1 class="h3 mb-0"><i class="fa-solid fa-users"></i>{{ __('actions.user title') }}</h1>
         </div>
     </div>
     <table class="table table-hover">

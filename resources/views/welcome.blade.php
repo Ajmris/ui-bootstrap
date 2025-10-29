@@ -117,7 +117,7 @@
                         <input type="number" class="form-control w-50 pull-right" placeholder="10 000,01" name="filter[price_max]" id="price-max-control">
                     </div>
                 </section>
-                <button type="button" id="filter-button" class="btn btn-lg btn-block btn-primary mt-5">{{ __('actions.filter') }}</button>
+                <button type="button" id="filter-button" class="btn btn-lg btn-block btn-primary mt-5"><i class="fa-solid fa-magnifying-glass"></i>{{ __('actions.filter') }}</button>
             </form>
             <!-- Główna część -->
             <div class="col-md-9 main-content">
